@@ -20,7 +20,7 @@ fetch('quotes/quotes.json')
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay);
 
-    document.getElementById('date').innerHTML = 'Today\'s quote is number ' + day;
+    document.getElementById('date').innerHTML = 'Today\'s quote:<br> ' + "#" +day;
 
     for (let i = 0; i < quotesfull.length; i++){
         if (day == parseInt(quotesfull[i].Index)){
