@@ -7,8 +7,6 @@ fetch('quotes/quotes.json')
         for (var i = 0; i < data.length; i++){
             quotesfull.push(data[i]);
         }
-    
-    console.log(JSON.stringify(quotesfull));
 
     for (let i = 0; i < quotesfull.length; i++){
         quotes.push(quotesfull[i].Quote);
@@ -46,10 +44,17 @@ function showoldstuff(){
         }
 
         let ele = document.getElementById('oldquotes');
+        var now = new Date();
+        var start = new Date(now.getFullYear(), 0, 0);
+        var diff = now - start;
+        var oneDay = 1000 * 60 * 60 * 24;
+        var day = Math.floor(diff / oneDay);
+
         if (localStorage.getItem('showing') == 0){
            for (let i = 0; i < quotesfull.length; i++){
-            //let ind = parseInt(quotesfull[i].Index);
-            ele.innerHTML += (i+1) + ") " + quotesfull[i].Quote + '<br>';
+                if (parseInt(quotesfull[i].Index) <= day){
+                    ele.innerHTML += (i+1) + ") " + quotesfull[i].Quote + '<br>';
+                }
             } 
         }
         localStorage.setItem('showing', 1);
