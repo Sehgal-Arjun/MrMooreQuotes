@@ -18,14 +18,18 @@ fetch('quotes/quotes.json')
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay);
 
-    document.getElementById('date').innerHTML = 'Today\'s quote:<br> ' + "#" +day;
+    document.getElementById('date').innerHTML = 'Today\'s quote:<br> ';
 
-    for (let i = 0; i < quotesfull.length; i++){
-        if (day == parseInt(quotesfull[i].Index)){
-            document.getElementById('quote').innerHTML =  '" ' + quotesfull[i].Quote + ' "';
-        }
+    console.log(quotes);
+
+    if (localStorage.getItem("date") != day){
+        var quote = quotes[Math.floor(Math.random()*quotes.length)];
+        localStorage.setItem("quote", quote);
     }
 
+    document.getElementById('quote').innerHTML =  '" ' + localStorage.getItem("quote") + ' "';
+
+    localStorage.setItem("date", day);
 
 })
 
@@ -52,9 +56,7 @@ function showoldstuff(){
 
         if (localStorage.getItem('showing') == 0){
            for (let i = 0; i < quotesfull.length; i++){
-                if (parseInt(quotesfull[i].Index) <= day){
-                    ele.innerHTML += (i+1) + ") " + quotesfull[i].Quote + '<br>';
-                }
+                ele.innerHTML += (i+1) + ") " + quotesfull[i].Quote + '<br>';
             } 
         }
         localStorage.setItem('showing', 1);
